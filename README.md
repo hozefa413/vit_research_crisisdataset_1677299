@@ -1,16 +1,39 @@
 # Applied Vision Transformer for CrisisMMD
 
-This repository contains a research project on applying a Vision Transformer (ViT) to the CrisisMMD dataset. The goal is to evaluate whether a transformer-based model can achieve strong overall classification accuracy while still handling rarer, more serious disaster-related classes effectively.
+This repository contains a research project focused on applying Vision Transformer (ViT) models to the CrisisMMD dataset. The goal is to investigate whether transformer-based image classification can achieve strong overall accuracy while maintaining reliable performance on rarer but more critical damage classes.
 
-## Project description
+The project is designed around a practical research question: in disaster-response and crisis informatics settings, a model should not only perform well on common classes, but also remain useful for minority classes that may represent higher-severity situations.
 
-This project explores how a ViT-based approach can be used for crisis-related image classification. The work is motivated by the need to balance strong overall performance with robustness on underrepresented but high-impact categories that are often critical in emergency response applications.
+## Project summary
 
-The main research focus is on understanding whether Vision Transformers can:
+The project studies how modern deep learning architectures can support crisis image analysis for damage classification. In particular, it explores the application of Vision Transformers to images from the CrisisMMD dataset and evaluates trade-offs between:
 
-- achieve strong overall accuracy on CrisisMMD data
-- maintain reliable performance for minority but important disaster classes
-- provide a useful research baseline for future work in crisis image analysis
+- overall classification accuracy
+- balanced accuracy
+- macro-F1 performance
+- sensitivity to rare and severe classes
+- model generalization and practical usability
+
+The repository includes a research notebook, rendered analysis output, supporting reports, and presentation materials. It is intended primarily as a research artifact and an exploratory benchmark for transformer-based disaster-damage classification.
+
+## Research objective
+
+This work examines whether a ViT-based model can:
+
+- achieve strong performance on crisis-related image data
+- generalize effectively across diverse disaster scenarios
+- maintain useful recall for underrepresented but important classes
+- serve as a strong baseline for future crisis image analysis work
+
+## Dataset and task
+
+The project uses the CrisisMMD dataset, which is a disaster-related dataset commonly used for crisis informatics and humanitarian response research.
+
+The task is image-based disaster-damage classification, with an emphasis on distinguishing damage severity levels. In real-world emergency settings, poor performance on rarer but more serious classes can be especially costly, so the project pays careful attention to class imbalance and metric selection.
+
+## Why this project matters
+
+In crisis monitoring and emergency response applications, image classification can help identify damage severity, affected infrastructure, and event impact. However, many disaster datasets are imbalanced and skewed toward more frequent classes. This project focuses on whether transformer-based models can provide a good balance between headline accuracy and reliability for the rarer cases that may matter most operationally.
 
 ## Language composition
 
@@ -19,34 +42,40 @@ This repository is primarily composed of:
 - HTML: 54.1%
 - Jupyter Notebook: 45.9%
 
-This composition reflects the project’s notebook-driven research workflow and the inclusion of a rendered HTML version for easier viewing in GitHub.
+This composition reflects the notebook-driven research workflow and the inclusion of an HTML-rendered notebook for easier browsing on GitHub.
 
-## Overview
+## Repository structure
 
-The project investigates multimodal disaster-related image classification using a ViT architecture. In emergency contexts, models must not only perform well on frequent classes but also remain useful for rare but operationally important situations. This research examines that balance and provides a foundation for further study in crisis-related computer vision.
+- `CrisisMMD_Final_Consolidated_Research_v3.ipynb` — main research notebook containing preprocessing, modeling, experiments, and evaluation results
+- `CrisisMMD_Final_Consolidated_Research_v3.html` — rendered version of the notebook for convenient viewing in GitHub
+- `CrisisMMD_Final_Research_Report_Enhanced_Previous_Version.docx` — final research report in document form
+- `CrisisMMD_ViT_Research_Journey.pptx` — presentation deck summarizing the project narrative and findings
+- `README.md` — repository overview and setup instructions
+- `requirements.txt` — Python package dependencies required to run the notebook
+- `docs/` — supporting project documentation (if present in the repository)
 
-## Repository contents
+## Project workflow
 
-- `CrisisMMD_Final_Consolidated_Research_v3.ipynb` — main notebook with preprocessing, experimentation, and analysis
-- `CrisisMMD_Final_Consolidated_Research_v3.html` — rendered notebook output for convenient viewing in GitHub
-- `CrisisMMD_Final_Research_Report_Enhanced_Previous_Version.docx` — research report
-- `CrisisMMD_ViT_Research_Journey.pptx` — presentation deck summarizing the project
-- `README.md` — project overview and usage guidance
-- `docs/` — supporting documentation folder
+The repository is structured around a research workflow that typically includes:
 
-## Research objective
+1. dataset loading and inspection
+2. annotation and image validation
+3. preprocessing and label preparation
+4. model experimentation with transformer-based architectures
+5. evaluation using classification metrics
+6. comparison of model configurations and training strategies
+7. documentation of findings and final conclusions
 
-This work evaluates whether a Vision Transformer can:
+## Expected environment
 
-- achieve strong overall performance on crisis-related image data
-- maintain robustness for underrepresented but high-impact disaster classes
-- serve as a meaningful baseline for future research in visual crisis analysis
+The project is intended for a Python-based experimental environment, typically with:
 
-## Dataset context
+- Python 3.9+
+- Jupyter Notebook or JupyterLab
+- optional GPU acceleration for faster training
+- PyTorch-based model training workflow
 
-The project uses the CrisisMMD dataset, which is designed for disaster-related classification tasks in crisis informatics and emergency-response research. The dataset presents class imbalance challenges, making it suitable for studying model performance under real-world imbalance conditions.
-
-## Setup
+## Setup instructions
 
 ### 1. Clone the repository
 
@@ -59,22 +88,35 @@ cd vit_research_crisisdataset_1677299
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
-### 3. Install the required Python packages
-
-There is no `requirements.txt` file included in this repository. Install the dependencies needed for the notebook manually, typically including packages such as:
+On macOS/Linux:
 
 ```bash
-pip install jupyter numpy pandas matplotlib scikit-learn opencv-python torch torchvision
+source .venv/bin/activate
 ```
 
-If the notebook uses additional libraries, install them as needed before running the analysis.
+On Windows:
 
-### 4. Open the notebook
+```bash
+.venv\Scripts\activate
+```
 
-Start Jupyter and open the notebook:
+### 3. Install dependencies
+
+Install the required packages using the repository's dependency file:
+
+```bash
+pip install -r requirements.txt
+```
+
+If you are working in a notebook environment that does not yet have dependencies installed, you can also install the most common packages manually:
+
+```bash
+pip install jupyter pandas numpy matplotlib seaborn scikit-learn pillow torch torchvision timm transformers mlflow
+```
+
+### 4. Launch Jupyter
 
 ```bash
 jupyter notebook
@@ -84,36 +126,114 @@ Then open:
 
 - `CrisisMMD_Final_Consolidated_Research_v3.ipynb`
 
-## Suggested workflow
+## Data requirements
 
-1. Review the notebook to understand the preprocessing and modeling pipeline.
-2. Reproduce the experiments in a clean environment.
-3. Evaluate both overall performance and sensitivity to rare, severe classes.
-4. Extend the project with alternative augmentation, balancing, or transformer tuning strategies.
+This repository does not include the CrisisMMD dataset files directly. To run the notebook end-to-end, you must obtain the dataset separately and place it in an accessible local directory as expected by the notebook's preprocessing code.
 
-## Data and environment notes
+Important notes:
 
-- This repository does not include the CrisisMMD dataset files directly.
-- You must obtain access to the dataset before running the notebook end-to-end.
-- The project may require GPU acceleration depending on the environment and implementation details.
-- The repository is intended for research exploration and academic experimentation.
+- the dataset is not bundled with the repository
+- image files and annotation files need to be available locally
+- some notebook execution may require adjusting dataset paths
+- GPU acceleration is strongly recommended for model training and experimentation
 
-## Project significance
+## Notebook usage
 
-This work contributes to the broader study of modern vision models in humanitarian and emergency settings. The central question is not only whether the model can achieve high aggregate accuracy, but also whether it can remain useful when class distributions are imbalanced and rare classes have greater real-world importance.
+The main notebook is the central artifact of this repository. It is intended as a consolidated record of the research process and contains the implementation used to explore the ViT-based approach.
 
-## Contribution
+Recommended sequence:
 
-Contributions, suggestions, and discussion are welcome. If you want to improve or extend the work, feel free to open an issue or submit a pull request with experiments, analysis, or documentation updates.
+1. open the notebook in Jupyter
+2. review the environment setup cells
+3. confirm all dependencies are installed
+4. validate dataset paths and file access
+5. run the analysis pipeline and experiment cells
+6. compare findings across validation and test metrics
 
-## License
+## Dependencies and tools
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+The project uses a scientific Python stack and deep learning tooling, including:
 
-## Citation and context
+- Python
+- Jupyter
+- NumPy
+- pandas
+- Matplotlib
+- Seaborn
+- scikit-learn
+- Pillow
+- PyTorch
+- TorchVision
+- timm
+- transformers
+- MLflow
 
-This project is intended as a research artifact for applied Vision Transformer work on crisis-related image classification. It should be cited or referenced appropriately when used as a basis for future study or publication.
+## Troubleshooting
+
+### Missing package errors
+
+If you encounter `ModuleNotFoundError`, reinstall the environment from `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
+```
+
+### GPU not detected
+
+Ensure that the correct CUDA-enabled PyTorch build is installed for your system. Some environments may need a GPU-enabled installation or a different CUDA version.
+
+### Dataset path errors
+
+Check that the CrisisMMD files are stored in the expected directory structure used by the notebook. If the notebook refers to a local dataset path, update it before running the cells.
+
+### Notebook execution issues
+
+If the notebook crashes or slows down, verify:
+
+- Python version compatibility
+- installation of deep learning dependencies
+- dataset access and path correctness
+- GPU availability
+- memory and runtime constraints
+
+## File details
+
+The repository includes both executable research materials and supporting documents:
+
+- the notebook provides the main technical implementation
+- the HTML file is a rendered notebook snapshot
+- the Word file offers a report-style narrative
+- the PPTX file summarizes the research journey and findings
+
+## Academic context
+
+This project is intended as a research artifact for applied Vision Transformer work on crisis-related image classification. It can be used as a foundation for further experimentation in areas such as:
+
+- class imbalance handling
+- stronger data augmentation
+- domain adaptation
+- transfer learning
+- rare-class optimization
+- operational deployment analysis
+
+## Contribution and extension
+
+This repository is suitable for experimentation and future development. Improvements may include:
+
+- stronger baseline comparisons
+- ablation studies
+- better imbalance handling
+- hyperparameter tuning
+- model benchmarking
+- reproducible training scripts and pipelines
+
+## Notes
+
+- This repository is centered on research and experimentation rather than a packaged software library.
+- The model and training outputs are intended for academic and exploratory use.
+- Dataset access and environment setup are required before the notebook can be executed fully.
 
 ## Summary
 
-This repository provides a research notebook and supporting materials for applying a Vision Transformer to the CrisisMMD dataset, with a focus on balancing overall accuracy and performance on rarer, more serious disaster classes.
+This repository provides a research-focused implementation and supporting materials for applying Vision Transformers to disaster-damage classification using CrisisMMD. The work is especially relevant for scenarios where strong aggregate accuracy must be balanced with reliable performance on rarer, more severe classes.
+
