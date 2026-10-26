@@ -1,0 +1,37 @@
+# .gitignore
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Training artifacts
+checkpoints/
+output/
+wandb/
+mlruns/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Large local data folders (if present locally but not committed)
+data/
+raw_data/
+processed_data/
